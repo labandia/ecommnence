@@ -1,0 +1,25 @@
+.shopping {
+  &__checkbox {
+    margin-bottom: 0.5em;
+    label {
+      font-size: var(--small-font-size);
+      font-weight: 400;
+      color: var(--text-color-light);
+      margin-left: 5px;
+      cursor: pointer;
+
+      &:hover {
+        color: var(--first-color);
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.promo {
+  background-color: var(--first-color);
+  color: #fff;
+  padding: 1em;
+  border-radius: 0.5em;
+  margin-top: 2em;
+}

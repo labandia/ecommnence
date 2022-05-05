@@ -1,0 +1,14 @@
+<div class="shopping__category">
+  <h3>Category</h3>
+  <div class="shopping__select">
+    <div class="shopping__checkbox" *ngFor="let c of category">
+      <input type="checkbox" name="vehicle3" />
+      <label for="sds">{{ c.name }}</label>
+    </div>
+  </div>
+
+  <div class="promo">
+    <p style="font-weight: 600">30% off sales</p>
+    <p style="font-size: 0.8rem">This month all sales have a 30% off price</p>
+  </div>
+</div>

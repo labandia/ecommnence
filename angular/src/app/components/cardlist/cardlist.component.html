@@ -1,0 +1,49 @@
+<div class="shopping__container">
+  <div class="shopping__searchcontainer">
+    <div class="shopping__inputbox">
+      <input
+        type="text"
+        [(ngModel)]="search"
+        placeholder="Search here ..."
+        (keyup)="filterClass($event)"
+      />
+      <i class="bx bx-search-alt"></i>
+    </div>
+  </div>
+  <p class="shopping__match">
+    Match search: <span>{{ search }}</span>
+  </p>
+  <div class="shopping__boxcontainer">
+    <div class="shopping__card" *ngFor="let items of products; let i = index">
+      <i
+        class="bx bx-heart heart"
+        *ngIf="toggleheart == false"
+        (click)="favorite()"
+      ></i>
+      <i
+        class="bx bxs-heart heart"
+        *ngIf="toggleheart == true"
+        (click)="favorite()"
+      ></i>
+      <div class="shopping__imgcontainer">
+        <img src="assets/celebrate.png" alt="" />
+      </div>
+      <h3>${{ items.price }}</h3>
+      <p>{{ items.name }}</p>
+      <button
+        (click)="addcart(items, i)"
+        [ngClass]="{ red: loading == true, green: loading == false }"
+      >
+        <i class="bx bx-cart-add" *ngIf="loading == false"></i>
+        <i class="bx bx-check bx-tada" *ngIf="loading == true"></i>
+      </button>
+    </div>
+  </div>
+
+  <ng-container *ngIf="products.length == 0">
+    <div class="shopping__data">
+      <i class="bx bxs-pyramid bx-flashing"></i>
+      <p>No results found</p>
+    </div>
+  </ng-container>
+</div>

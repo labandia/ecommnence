@@ -1,0 +1,9 @@
+<!-- <div >sdsld;sd</div>
+
+<button (click)="toggleshow()">sdsd</button> -->
+
+<li *ngFor="let item of [1, 4, 5, 6]; let i = index">
+  <button class="cart" [@buttonState]="state" (click)="toggleshow()">
+    <i class="icon-addcart"></i>button {{ i }}
+  </button>
+</li>
