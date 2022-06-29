@@ -1,0 +1,71 @@
+@use "../../scss/index" as *;
+
+header {
+  width: 100%;
+  height: 10vh;
+  top: 0;
+  left: 0;
+  // background-color: var(--body-color);
+  background-color: var(--header-color);
+  box-shadow: 0 1px 4px hsla(0, 4%, 15%, 0.1);
+}
+
+.nav{
+  @include flex(center, space-between);
+  line-height: 10vh;
+  
+  &__brand {
+    @include flex(center, flex-start);
+    line-height: 10vh;
+    column-gap: 5px;
+    .bx {
+      color: hsl(248, 41%, 47%);
+    }
+  }
+
+  &__action {
+    @include flex(center, flex-start);
+    gap: 1.5em;
+
+    .bx {
+      transform: scale(1.4);
+      cursor: pointer;
+    }
+  }
+
+  &__cart {
+    position: relative;
+    span {
+      @include flex(center, center);
+      background-color: var(--first-color-alt);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      position: absolute;
+      top: 1em;
+      font-size: 0.7rem;
+      color: #fff;
+      font-weight: var(--font-semi-bold);
+      right: -1em;
+    }
+  }
+  
+
+  &__btn {
+    background-color: hsl(248, 41%, 47%);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: .5em 1em;
+    border-radius: 0.5em;
+    font-weight: var(--font-semi-bold);
+  }
+ 
+}
+
+
+.active {
+  color: hsl(248, 32%, 56%);
+  font-weight: 600;
+  position: relative;
+}

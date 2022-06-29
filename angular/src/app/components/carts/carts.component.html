@@ -1,1 +1,32 @@
-<p>carts works!</p>
+<header>
+    <h3>My cartlist</h3>
+    <button mat-icon-button mat-dialog-close><i class='bx bx-x'></i></button>
+</header>
+
+<div class="cart">
+    <div class="cart__card" *ngFor="let item of list; let i = index">
+         <div class="cart__imgcontainer">
+            <img  src="assets/sample1.png" alt="">
+         </div>
+         <div class="cart__item">
+            <p class="cart__name">{{item.name}}</p>
+            <!-- <small>{{item.}}</small> -->
+         </div>
+
+         <span class="cart__score">P{{item.price}}</span>
+    </div>
+</div>
+
+<ng-container *ngIf="list.length == 0">
+   <div class="nodata">
+         <i class='bx bxs-package'></i>
+         <p>No items added</p>
+   </div>
+</ng-container>
+
+<div class="total">
+    <p>Total: </p>
+    <span class="total_gtotal">{{gtotal}}</span>
+</div>
+
+<button class="btn" (click)="purchaseitems()" mat-flat-button>Purchase items</button>

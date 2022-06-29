@@ -1,0 +1,220 @@
+@use "../../scss/index" as *;
+
+.shopping {
+  display: grid;
+  grid-template-columns: 20% 1fr;
+  align-items: flex-start;
+  column-gap: 1.5em;
+  padding: 1.5em 0;
+  max-height: 90vh;
+}
+
+.card {
+  &__match {
+    margin: 1em 0;
+    font-size: var(--small-font-size);
+    font-weight: var(--font-medium);
+    span {
+      font-weight: 400;
+    }
+  }
+
+  &__searchcontainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    background-color: var(--header-color);
+    box-shadow: 0 1px 4px hsla(0, 4%, 15%, 0.1);
+    margin-bottom: 1em;
+    padding: 1em;
+    border-radius: 0.5em;
+    p {
+      font-size: var(--small-font-size);
+      margin: 0.5em 0 0 0.2em;
+    }
+  }
+
+  &__inputbox {
+    display: flex;
+    align-items: center;
+    background-color: var(--body-color);
+    input {
+      border: none;
+      width: 93%;
+      border-radius: 0.5em;
+      padding: 0.5em 1em;
+      background: none;
+      outline: none;
+      color: var(--text-color);
+      font-size: var(--small-font-size);
+    }
+    .bx {
+      transform: scale(1.2);
+    }
+  }
+
+  &__boxcontainer {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    gap: 1.5em;
+    padding: 0.2em 0 2em;
+    max-height: 60vh;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  &__boxcontainer::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__imgcontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 50%;
+      transition: 0.5s;
+    }
+  }
+
+  &__data {
+    width: 100%;
+    padding-top: 5em;
+    text-align: center;
+    .bx {
+      font-size: 6rem;
+    }
+    p {
+      font-weight: 600;
+    }
+  }
+
+  &__card {
+    position: relative;
+    padding: 1em;
+    background-color: var(--header-color);
+    box-shadow: 0 4px 16px hsla(355, 25%, 15%, 0.1);
+
+    border-radius: 0.5em;
+
+    &:hover {
+      img {
+        transform: translateY(-10px);
+      }
+    }
+
+    .stocks {
+      position: absolute;
+      top: 1em;
+      left: 1em;
+      z-index: 100;
+      font-size: 0.7rem;
+      color: #fff;
+      padding: 0.2em 0.5em;
+      border-radius: 25px;
+      background-color: var(--first-color-alt);
+    }
+
+    .heart {
+      color: var(--first-color-alt);
+      transform: scale(1.3);
+      position: absolute;
+      top: 1em;
+      right: 1em;
+      cursor: pointer;
+      // animation: beat 0.25s infinite alternate;
+    }
+    h3 {
+      color: var(--price-color);
+    }
+    p {
+      width: 90%;
+      font-size: var(--small-font-size);
+      color: var(--text-color-light);
+    }
+    button {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      cursor: pointer;
+      transition: all 0.5s;
+      border: none;
+      padding: 1em 1.2em;
+      border-radius: 1em 0 1em 0;
+      background-color: hsl(248, 41%, 47%);
+      color: #fff;
+      .bx {
+        // transform: scale(1.6);
+        font-weight: 500;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+.red {
+  background-color: var(--button-color);
+}
+
+.green {
+  background-color: var(--first-color);
+}
+.selected-item {
+  animation: changeback 2s ease;
+}
+
+@keyframes changeback {
+  0% {
+    background-color: rebeccapurple;
+  }
+  100% {
+    background-color: green;
+  }
+}
+
+.selects {
+  padding: 1.5em;
+  background-color: var(--header-color);
+  border-radius: 0.5em;
+  box-shadow: 0 1px 4px hsla(0, 4%, 15%, 0.1);
+
+  h3 {
+    font-size: var(--small-font-size);
+    margin-bottom: var(--mb-1);
+    color: var(--text-color);
+  }
+
+  &__checkbox {
+    margin-bottom: 0.8em;
+    p {
+      font-size: var(--small-font-size);
+      font-weight: 400;
+      color: var(--text-color-light);
+      margin-left: 5px;
+      margin-bottom: 0.5em;
+      cursor: pointer;
+
+      // &:hover {
+      //   color: hsl(248, 41%, 47%);
+      //   font-weight: 600;
+      // }
+    }
+  }
+
+  &__select {
+    margin-bottom: var(--mb-1);
+  }
+}
+
+.selectitem {
+  color: hsl(248, 41%, 47%) !important;
+  font-weight: 600 !important;
+}
+
+.promo {
+  background-color: hsl(248, 41%, 47%);
+  color: #fff;
+  padding: 1em;
+  border-radius: 0.5em;
+  margin-top: 2em;
+}

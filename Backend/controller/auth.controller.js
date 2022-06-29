@@ -22,11 +22,19 @@ const loginController = async (req, res) => {
       //    maxAge: 86_400_000,
       //    httpOnly: true,
       // });
-      res.json({ token: accessToken });
+      res.json({ token: accessToken, id: user.userId });
    } catch (error) {
       console.log(error);
       res.status(403).json({ error });
    }
+};
+
+const userinfoController = async (req, res) => {
+   let id = req.params.id;
+   try {
+      let [data] = await userService.getUserinfo(id);
+      res.json({ success: true, payload: data });
+   } catch (error) {}
 };
 
 const refreshTokenController = (req, res) => {};
@@ -35,4 +43,5 @@ module.exports = {
    registerController,
    loginController,
    refreshTokenController,
+   userinfoController,
 };

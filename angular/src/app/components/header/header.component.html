@@ -1,37 +1,18 @@
 <header class="header" id="header">
   <nav class="nav container" id="nav-bar">
     <a class="nav__brand"><i class="bx bxl-meta"></i> ecommence </a>
-    <ul class="nav__menu">
-      <li class="nav__list">
-        <a href="" class="nav__link" routerLink="" routerLinkActive="active"
-          >Shop</a
-        >
-        <a
-          href=""
-          class="nav__link"
-          routerLink="contacts"
-          routerLinkActive="active"
-          >Contacts</a
-        >
-        <a
-          href=""
-          class="nav__link"
-          routerLink="about"
-          routerLinkActive="active"
-          >About</a
-        >
-      </li>
-    </ul>
 
     <div class="nav__action">
-      <i class="bx bx-moon"></i>
+      <i class="bx bx-home"  routerLink="shop"></i>
+      <i class="bx bx-moon" *ngIf="theme == true" (click)="toggleTheme()"></i>
+      <i class="bx bx-sun" *ngIf="theme == false" (click)="toggleTheme()"></i>
 
-      <div class="nav__cart">
+      <div class="nav__cart" (click)="opencart()">
         <i class="bx bx-cart"></i>
         <span *ngIf="count != 0">{{ count }}</span>
       </div>
 
-      <i class="bx bx-book-heart"></i>
+    
       <button class="nav__btn" routerLink="login">Sign-in</button>
       <!-- <div class="nav__avatar"><i class="bx bx-user"></i></div> -->
     </div>

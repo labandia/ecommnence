@@ -1,0 +1,27 @@
+<div class="view">
+  <div class="view__imgcontainer">
+    <img src="assets/sample1.png" alt="" />
+    <div class="view__slider">
+      <img src="assets/sample1.png" alt="" />
+      <img src="assets/sample1.png" alt="" />
+      <img src="assets/sample1.png" alt="" />
+    </div>
+  </div>
+
+  <div class="view__details">
+    <h2>{{ data.name }}</h2>
+    <hr />
+    <p style="white-space: pre-line; margin-bottom: 1em">
+      {{ data.Description }}
+    </p>
+    <span>P {{ data.price }}</span>
+    <button class="view__btn" (click)="additem()" mat-button>
+      <span *ngIf="loading == false">Add to cart</span>
+      <span *ngIf="loading == true"
+        ><i class="bx bx-loader-alt bx-spin"></i> loading....</span
+      >
+    </button>
+  </div>
+</div>
+
+<i mat-dialog-close class="bx bxs-x-circle close"></i>

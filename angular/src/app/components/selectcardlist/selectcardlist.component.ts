@@ -1,95 +1,69 @@
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, ActivatedRouteSnapshot, NavigationStart, Router } from '@angular/router';
+import { DataService } from 'src/app/services/data.service';
+import { UserService } from 'src/app/services/user.service';
+import { Observable } from 'rxjs';
 import {
   BreakpointObserver,
   Breakpoints,
   BreakpointState,
 } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { DataService } from 'src/app/services/data.service';
-import { UserService } from 'src/app/services/user.service';
 import { ViewcartComponent } from '../viewcart/viewcart.component';
 
 @Component({
-  selector: 'app-cardlist',
-  templateUrl: './cardlist.component.html',
-  styleUrls: ['./cardlist.component.scss'],
-  animations: [
-    trigger('actionAnimation', [
-      state(
-        'orig',
-        style({
-          transform: 'scale(1)',
-          opacity: 1,
-        })
-      ),
-      state(
-        'small',
-        style({
-          transform: 'scale(0.75)',
-          opacity: 0.3,
-        })
-      ),
-      transition('* => *', animate('500ms ease-in-out')),
-    ]),
-  ],
+  selector: 'app-selectcardlist',
+  templateUrl: './selectcardlist.component.html',
+  styleUrls: ['./selectcardlist.component.scss']
 })
-export class CardlistComponent implements OnInit {
-  category: any = [];
+export class SelectcardlistComponent implements OnInit {
+  Obj : object = {};
   products: any = [];
   favoriteitem: any = [];
-
-  search: string = '';
-  toggleheart: boolean = false;
+  category: any = [];
+  toggleheart: boolean = true;
   isloading: boolean = false;
-  selectedItem: any;
 
-  state: string = 'orig';
+
+  loading: boolean = false;
 
   isExtraSmall: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.XSmall
   );
 
-  constructor(public _data: DataService,
+
+  constructor(private route: ActivatedRoute,
+    public router: Router,
+    private _ds: DataService, 
+    private activatedRoute:ActivatedRoute, 
     public _user: UserService,
     private breakpointObserver: BreakpointObserver,
     public dialog: MatDialog,
-    private _snackBar: MatSnackBar) {}
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.inititaldata();
+     this.route.params.subscribe(res=>{
+      this.displaycards(res['id']);
+    })
+  }
+
+  async displaycards(id: any){
+     this.loading = true;
+     try {
+        let result : any = await this._ds.getdata('getcategory', id);
+        if(result !== 0){
+            this.loading = false;
+            this.products = result;
+        }
+     } catch (error) {
+        console.log(error);
+     }
+
   }
 
 
-  inititaldata() {
-    this.isloading = true;
-    setTimeout(()=>{
-        this._data.getdata('getproduct', 0).subscribe((data=>{
-            this.products = data.payload;
-        }))
-
-        this._data.getdata('favorites', 0).subscribe((data=>{
-            this.favoriteitem = data.payload;
-        }))
-
-        this._data.getdata('getcategory', 0).subscribe((data=>{
-            this.category = data.payload;
-        }))
-        this.isloading = false;
-    }, 1000)
-  }
-
-
-
-  addcart(items: any, id: number) {
+   addcart(items: any, id: number) {
     const dialogRef = this.dialog.open(ViewcartComponent, {
       panelClass: 'viewpadding',
       width: '100vw',
@@ -120,7 +94,7 @@ export class CardlistComponent implements OnInit {
   }
 
 
-  favorite(data: any, id: number) {
+   favorite(data: any, id: number) {
     this.toggleheart = !this.toggleheart;
 
     let content = {
@@ -136,14 +110,14 @@ export class CardlistComponent implements OnInit {
       return x.product_id == data.product_id;
     });
     if (favoritefound) {
-      this._data
+      this._ds
         .postdata('delfavorites', prod)
         .toPromise()
         .then((result: any) => {
           this.inititaldata();
         });
     } else {
-      this._data
+      this._ds
         .postdata('addfavorites', content)
         .toPromise()
         .then((result: any) => {
@@ -152,15 +126,24 @@ export class CardlistComponent implements OnInit {
     }
   }
 
-  filterClass(e: Event) {
-    if (this.search != '') {
-      this.products = this.products.filter((res: any) => {
-        return res.name
-          .toLocaleLowerCase()
-          .match(this.search.toLocaleLowerCase());
-      });
-    } else {
-      this.ngOnInit();
-    }
+
+  inititaldata() {
+    this.isloading = true;
+    setTimeout(()=>{
+        this._ds.getdata('getproduct', 0).subscribe((data=>{
+            this.products = data.payload;
+        }))
+
+        this._ds.getdata('favorites', 0).subscribe((data=>{
+            this.favoriteitem = data.payload;
+        }))
+
+        this._ds.getdata('getcategory', 0).subscribe((data=>{
+            this.category = data.payload;
+        }))
+        this.isloading = false;
+    }, 1000)
+
   }
+
 }

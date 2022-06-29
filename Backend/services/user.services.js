@@ -51,7 +51,13 @@ const checkUser = async (username, password) => {
    return { userId: user.user_id, username };
 };
 
+const getUserinfo = async (id) => {
+   let sql = "SELECT * FROM userinfo WHERE user_id = ?";
+   return await pool.query(sql, [id]);
+};
+
 module.exports = {
    addUser,
    checkUser,
+   getUserinfo,
 };

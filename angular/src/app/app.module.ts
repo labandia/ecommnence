@@ -14,6 +14,12 @@ import { CartsComponent } from './components/carts/carts.component';
 import { DataService } from './services/data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SelectcardlistComponent } from './components/selectcardlist/selectcardlist.component';
+import { UserService } from './services/user.service';
+import { ViewcartComponent } from './components/viewcart/viewcart.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -25,15 +31,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     ContactsComponent,
     CartsComponent,
+    SelectcardlistComponent,
+    ViewcartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatSnackBarModule,
     HttpClientModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule
   ],
-  providers: [DataService],
+  providers: [DataService, UserService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

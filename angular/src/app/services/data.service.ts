@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Category } from '../interface/category';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { config } from '../config';
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
@@ -12,8 +13,18 @@ export class DataService {
 
   constructor(private http: HttpClient) {}
 
-  getdata(api: string) {
-    return this.http.get<Category[]>(`http://localhost:5000/v1/prod/${api}`);
+
+  getdata(api: string, params: any): Observable<any>{
+    if (params == 0) {
+       return this.http.get(`${config.apiUrl}${api}`)
+    } else {
+      return this.http.get(`${config.apiUrl}${api}/${params}`)
+    }
+  }
+
+
+  postdata(api: string, obj: any) {
+    return this.http.post(`${config.apiUrl}${api}`, obj);
   }
 
   setcart(item: any) {

@@ -1,0 +1,15 @@
+@mixin flex($align, $content) {
+  display: flex;
+  align-items: $align;
+  justify-content: $content;
+}
+
+@mixin grid($columns) {
+  display: grid;
+  grid-template-columns: $columns;
+}
+
+@mixin fontsize($size, $weight) {
+  font-size: $size;
+  font-weight: $weight;
+}
