@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CategoryComponent } from './components/category/category.component';
 import { CardlistComponent } from './components/cardlist/cardlist.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShopComponent } from './modules/shop/shop.component';
 import { LoginComponent } from './modules/login/login.component';
 import { ContactsComponent } from './modules/contacts/contacts.component';
@@ -20,6 +20,9 @@ import { ViewcartComponent } from './components/viewcart/viewcart.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -38,9 +41,13 @@ import { MatButtonModule } from '@angular/material/button';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     MatDialogModule,
     MatButtonModule,
     MatSnackBarModule,
+    MatMenuModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
     HttpClientModule,
     BrowserAnimationsModule
   ],

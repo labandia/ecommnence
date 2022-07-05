@@ -6,7 +6,7 @@
 <div class="cart">
     <div class="cart__card" *ngFor="let item of list; let i = index">
          <div class="cart__imgcontainer">
-            <img  src="assets/sample1.png" alt="">
+            <img  src="{{url}}{{item.image}}" alt="">
          </div>
          <div class="cart__item">
             <p class="cart__name">{{item.name}}</p>

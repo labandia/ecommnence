@@ -46,7 +46,7 @@ export class CardlistComponent implements OnInit {
   category: any = [];
   products: any = [];
   favoriteitem: any = [];
-
+  url : string = 'http://localhost:5000/v1/images/';
   search: string = '';
   toggleheart: boolean = false;
   isloading: boolean = false;

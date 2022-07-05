@@ -48,7 +48,8 @@ export class HeaderComponent implements OnInit {
     this._user.userstatus.subscribe((users: any) => {
       this.users = users;
     });
-    this.userslocal = this._user.getUserinfo();
+    this.userslocal = this._user.getUserinfo().length;
+    console.log(this.userslocal);
   }
 
   setdarkmode() {

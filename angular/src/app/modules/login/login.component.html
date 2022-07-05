@@ -1,13 +1,37 @@
 <div class="login">
-  <form class="form">
-    <h3>Welcome to <i class="bx bxl-meta"></i> Ecommence</h3>
-    <div class="form__inputs">
-      <label for="">Email address</label>
-      <input type="text" placeholder="example: juandelacruz@gmail.com" />
-      <label for="">Password</label>
-      <input type="password" placeholder="Enter your password" />
-      <button>Sign-in</button>
+  <form class="form" [formGroup]="LoginForm" #logsform="ngForm"  (ngSubmit)="loginuser()">
+    <div class="form__headeer">
+      <h2>Sign in<i class="bx bxl-meta"></i></h2>
     </div>
+    <hr>
+    <div class="form__inputs">
+      <div class="form__headeer">
+          <label for="" >Email</label>
+          <ng-container *ngIf="logsform.submitted && f['username'].errors!">
+              <small *ngIf="f['username'].errors!['required']">*Email is required</small>
+          </ng-container>
+      </div>
+     <input
+        type="text"
+        formControlName="username"
+        placeholder="example: juandelacruz@gmail.com"
+        required
+      />
+      <div class="form__headeer">
+          <label for="" >Password</label>
+          <ng-container *ngIf="logsform.submitted && f['password'].errors!">
+              <small *ngIf="f['password'].errors!['required']">*Password is required</small>
+          </ng-container>
+      </div>
+      <input
+        type="password"
+        formControlName="password"
+        placeholder="Enter your password"
+        required
+      />
+      <button type="submit">Sign-in</button>
+    </div>
+    
 
     <p style="margin-top: 1.5em; font-size: var(--small-font-size)">
       Dont have a account? Register

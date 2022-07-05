@@ -24,9 +24,8 @@ export class SelectcardlistComponent implements OnInit {
   category: any = [];
   toggleheart: boolean = true;
   isloading: boolean = false;
-
-
-  loading: boolean = false;
+  search: string = '';
+  url : string = 'http://localhost:5000/v1/images/';
 
   isExtraSmall: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.XSmall
@@ -44,18 +43,24 @@ export class SelectcardlistComponent implements OnInit {
 
   ngOnInit(): void {
      this.route.params.subscribe(res=>{
+      console.log(res['id']);
       this.displaycards(res['id']);
     })
   }
 
   async displaycards(id: any){
-     this.loading = true;
+     this.isloading = true;
      try {
-        let result : any = await this._ds.getdata('getcategory', id);
-        if(result !== 0){
-            this.loading = false;
-            this.products = result;
-        }
+        await this._ds.getdata('getcategory', id).subscribe((data: any)=>{
+            let res = data.payload;
+            if( res.length !== 0){
+                setTimeout(()=>{
+                  this.isloading = false;
+                  this.products = res;
+                }, 1000)
+            }
+        });
+        
      } catch (error) {
         console.log(error);
      }
@@ -144,6 +149,19 @@ export class SelectcardlistComponent implements OnInit {
         this.isloading = false;
     }, 1000)
 
+  }
+
+
+   filterClass(e: Event) {
+    if (this.search != '') {
+      this.products = this.products.filter((res: any) => {
+        return res.name
+          .toLocaleLowerCase()
+          .match(this.search.toLocaleLowerCase());
+      });
+    } else {
+      this.ngOnInit();
+    }
   }
 
 }

@@ -2,11 +2,14 @@
   <h3>Category</h3>
   <div class="selects__select">
     <div class="selects__checkbox">
-      <p class="sds" routerLink="all">All</p>
+      <p class="sds"  
+          (click)="selectcategory([], 'all')"
+          [ngClass]="allselect ? 'selectitem' : ''"
+        >All Products</p>
       <ng-container *ngFor="let c of category">
           <p
             class="sds"
-            (click)="selectcategory(c)"
+            (click)="selectcategory(c, '')"
             [ngClass]="c.clicked ? 'selectitem' : ''"
           >
             {{ c.name }}

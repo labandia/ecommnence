@@ -11,6 +11,7 @@ import { DataService } from 'src/app/services/data.service';
 export class CategoryComponent implements OnInit {
   category: any = [];
   selectedItem: any = 0;
+  allselect : boolean = true;
   subscription: Subscription | undefined;
 
   constructor(public _ds: DataService, private route: Router) {}
@@ -25,15 +26,21 @@ export class CategoryComponent implements OnInit {
   //     this.subscription?.unsubscribe();
   // }
 
-  selectcategory(cat: any) {
-    this.category.forEach((element: any) => {
-      element.clicked = false;
-    });
-    this.selectedItem = 1;
-    cat.clicked = true;
-    this.route.navigate(['shop', cat.category_id]);
-    // this.route.navigateByUrl(`shop/${cat.name}`, { state: cat });
-    // this.route.navigate(['shop', cat.category_id], {queryParams: {cat}})
-
+  selectcategory(cat: any, oth: string) {
+     if(oth !== 'all'){
+      this.category.forEach((element: any) => {
+        element.clicked = false;
+      });
+      this.selectedItem = 1;
+      cat.clicked = true;
+      this.allselect = false;
+      this.route.navigate(['shop', cat.category_id]);
+     }else{
+      this.category.forEach((element: any) => {
+        element.clicked = false;
+      });
+      this.allselect = true;
+      this.route.navigate(['shop/all']);
+     }
   }
 }

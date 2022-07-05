@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CartService } from 'src/app/services/cart.service';
 import { DataService } from 'src/app/services/data.service';
+import { imageurl } from 'src/app/config';
 
 @Component({
   selector: 'app-carts',
@@ -13,8 +14,10 @@ export class CartsComponent implements OnInit {
 
   list: any = [];
   gtotal: number = 0;
+  url : string = imageurl.imageurl;
 
   constructor(private _cart: CartService, 
+    private _ds: DataService,
     public dialogRef: MatDialogRef<CartsComponent>, 
     private _snackBar: MatSnackBar) { }
 
@@ -32,11 +35,15 @@ export class CartsComponent implements OnInit {
   }
 
   purchaseitems(){
-    this._cart.clearallcart();
-    this._snackBar.open('Thanks for purchase', 'close', {
-        duration: 1000
-    });
-    this.dialogRef.close('');
+    this._ds.postdata('payments', {amount: this.gtotal}).subscribe((data: any)=>{
+        if(data.success == true){
+          this._cart.clearallcart();
+          this._snackBar.open('Thanks for purchase', 'close', {
+              duration: 1000
+          });
+          this.dialogRef.close('');
+        }
+    })
   }
 
 }

@@ -1,5 +1,20 @@
-  <div class="card__boxcontainer">
-      <div class="card__card" *ngFor="let items of products; let i = index">
+<div class="card__searchcontainer">
+      <div class="card__inputbox">
+        <input
+          type="text"
+          [(ngModel)]="search"
+          placeholder="Search here ..."
+          (keyup)="filterClass($event)"
+        />
+        
+        <i class="bx bx-search-alt"></i>
+      </div>
+  </div>  
+  
+  
+  <ng-container *ngIf="isloading == false">
+    <div class="card__boxcontainer">
+     <div class="card__card" *ngFor="let items of products; let i = index">
         <!-- <i
         [ngClass]="toggleheart ? 'bx-heart heart' : ' bxs-heart heart'"
         [disabled]="toggleheart ? false : true"
@@ -34,7 +49,7 @@
         </ng-container>
 
         <div class="card__imgcontainer">
-          <img loading="lazy" src="assets/images-removebg-preview.png" alt="" />
+          <img loading="lazy" src="{{url}}{{items.image}}" alt="" />
         </div>
         <h3>P {{ items.price }}</h3>
         <p>{{ items.name }}</p>
@@ -43,12 +58,26 @@
           <!-- <i class="bx bx-cart-add" *ngIf="loading == false"></i> -->
           <!-- <i class="bx bx-check bx-tada" *ngIf="loading == true"></i> -->
         </button>
-      </div>
-    </div>
+            </div>
 
-    <ng-container *ngIf="products.length == 0">
-      <div class="card__data">
-        <i class="bx bxs-pyramid bx-flashing"></i>
-        <p>No results found</p>
+     
       </div>
+
+       <ng-container *ngIf="products.length == 0">
+          <div class="card__data">
+            <i class="bx bxs-pyramid bx-flashing"></i>
+            <p>No results found</p>
+          </div>
+        </ng-container>
+  </ng-container> 
+ 
+
+
+   <ng-container *ngIf="isloading == true">
+          <div class="loadingcontain">
+            <mat-spinner></mat-spinner>
+            <p>Loading data please wait...</p>
+         </div>
     </ng-container>
+
+   

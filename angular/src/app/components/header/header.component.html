@@ -13,8 +13,12 @@
       </div>
 
     
-      <button class="nav__btn" routerLink="login">Sign-in</button>
-      <!-- <div class="nav__avatar"><i class="bx bx-user"></i></div> -->
+      <button class="nav__btn" *ngIf="userslocal === undefined"  routerLink="login">Sign-in</button>
+      <button class="nav__user"  *ngIf="userslocal !== undefined" mat-icon-button [matMenuTriggerFor]="beforeMenu"><i class='bx bxs-user-circle'></i></button>
+      <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <button mat-menu-item>Settings</button>
+        <button (click)="Logout()" mat-menu-item>Logout</button>
+      </mat-menu>
     </div>
   </nav>
 </header>

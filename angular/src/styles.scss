@@ -1,5 +1,7 @@
 @use "app/scss/index" as *;
 
+
+
 .dialogpadding .mat-dialog-container {
   padding: 1.2em !important;
   background-color: var(--header-color);
@@ -64,13 +66,4 @@ input[type="checkbox"]:checked:before {
 
 .activebox {
   color: var(--first-color) !important;
-}
-
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

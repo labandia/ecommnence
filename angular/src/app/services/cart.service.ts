@@ -26,6 +26,7 @@ export class CartService {
     } else {
       this.cart.push({
         id: this.cart.length + 1,
+        image: item.image,
         name: item.name,
         quantity: 1,
         origprice: item.price,

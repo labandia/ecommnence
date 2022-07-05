@@ -15,3 +15,6 @@ app.use(cors());
 app.use("/v1/", routes);
 
 app.listen(process.env.PORT, () => console.log(`Server running on port 5000`));
+
+
+

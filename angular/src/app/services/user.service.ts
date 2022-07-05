@@ -18,7 +18,7 @@ export class UserService {
 
   setUserinfo(id: number) {
     this.http
-      .get(`${userconfig.apiUrl}${id}`)
+      .get(`${userconfig.apiUrl}info/${id}`)
       .subscribe((data: any) => {
         this.usersource.next(data.payload[0]);
         this.setUserinfolocal(data.payload[0]);

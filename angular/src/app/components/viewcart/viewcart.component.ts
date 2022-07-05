@@ -11,6 +11,7 @@ import { CartService } from 'src/app/services/cart.service';
 export class ViewcartComponent implements OnInit {
   cartitem: any = [];
   loading: boolean = false;
+  url: string = 'http://localhost:5000/v1/images/'
 
   constructor(
     private dialogReg: MatDialogRef<ViewcartComponent>,

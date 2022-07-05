@@ -2,7 +2,7 @@ const pool = require("../config/mysql-database");
 
 const getprod = async () => {
    let sql =
-      "SELECT products.product_id, products.name, products.Description, products.category_id, inventory.quantity, products.price FROM products INNER JOIN inventory ON products.inventory_id = inventory.inventory_id";
+      "SELECT products.product_id, products.name, products.Description, products.image, products.category_id, inventory.quantity, products.price FROM products INNER JOIN inventory ON products.inventory_id = inventory.inventory_id";
    return await pool.query(sql);
 };
 
@@ -12,7 +12,7 @@ const getcategory = async () => {
 };
 
 const getcategoryByName = async (id) => {
-   let sql = "SELECT products.product_id, products.name, products.Description, products.category_id, inventory.quantity, products.price FROM products INNER JOIN inventory ON products.inventory_id = inventory.inventory_id INNER JOIN category ON category.category_id = products.category_id WHERE category.category_id = ?;";
+   let sql = "SELECT products.product_id, products.name, products.Description, products.image, products.category_id, inventory.quantity, products.price FROM products INNER JOIN inventory ON products.inventory_id = inventory.inventory_id INNER JOIN category ON category.category_id = products.category_id WHERE category.category_id = ?;";
    return await pool.query(sql, id);
 };
 
