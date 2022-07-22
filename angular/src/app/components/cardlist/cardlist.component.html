@@ -1,84 +1,75 @@
-  <div class="card__searchcontainer">
-      <div class="card__inputbox">
-        <input
-          type="text"
-          [(ngModel)]="search"
-          placeholder="Search here ..."
-          (keyup)="filterClass($event)"
-        />
-        
-        <i class="bx bx-search-alt"></i>
-      </div>
+<div class="card__searchcontainer">
+  <div class="card__inputbox">
+    <input
+      type="text"
+      [(ngModel)]="search"
+      placeholder="Search here ..."
+      (keyup)="filterClass($event)"
+    />
+
+    <i class="bx bx-search-alt"></i>
   </div>
-  
-  
-  
-  <ng-container *ngIf="isloading == false">
-    <div class="card__boxcontainer">
-     <div class="card__card" *ngFor="let items of products; let i = index">
-        <!-- <i
+</div>
+
+<ng-container *ngIf="isloading == false">
+  <div class="card__boxcontainer">
+    <div class="card__card" *ngFor="let items of products; let i = index">
+      <!-- <i
         [ngClass]="toggleheart ? 'bx-heart heart' : ' bxs-heart heart'"
         [disabled]="toggleheart ? false : true"
         class="bx"
         (click)="favorite()"
       ></i> -->
 
-        <span class="stocks" *ngIf="items.quantity == 0">Out of stocks</span>
+      <span class="stocks" *ngIf="items.quantity == 0">Out of stocks</span>
 
-        <ng-container *ngFor="let f of favoriteitem; let j = index">
-          <ng-container
-            *ngIf="f.product_id === items.product_id; else notheaet"
-          >
-            <i
-              class="bx bxs-heart heart"
-              (click)="favorite(items, items.product_id)"
-            ></i>
-          </ng-container>
-          <ng-template #notheaet>
-            <i
-              class="bx bx-heart heart"
-              (click)="favorite(items, items.product_id)"
-            ></i>
-          </ng-template>
+      <ng-container *ngFor="let f of favoriteitem; let j = index">
+        <ng-container *ngIf="f.product_id === items.product_id; else notheaet">
+          <i
+            class="bx bxs-heart heart"
+            (click)="favorite(items, items.product_id)"
+          ></i>
         </ng-container>
-
-        <ng-container *ngIf="favoriteitem.length == 0">
+        <ng-template #notheaet>
           <i
             class="bx bx-heart heart"
             (click)="favorite(items, items.product_id)"
           ></i>
-        </ng-container>
+        </ng-template>
+      </ng-container>
 
-        <div class="card__imgcontainer">
-          <img loading="lazy" src="{{url}}{{items.image}}" alt="" />
-        </div>
-        <h3>P {{ items.price }}</h3>
-        <p>{{ items.name }}</p>
-        <button (click)="addcart(items, i)">
-          <i class="bx bx-cart-add"></i>
-          <!-- <i class="bx bx-cart-add" *ngIf="loading == false"></i> -->
-          <!-- <i class="bx bx-check bx-tada" *ngIf="loading == true"></i> -->
-        </button>
-            </div>
+      <ng-container *ngIf="favoriteitem.length == 0">
+        <i
+          class="bx bx-heart heart"
+          (click)="favorite(items, items.product_id)"
+        ></i>
+      </ng-container>
 
-     
+      <div class="card__imgcontainer">
+        <!-- <img loading="lazy" src="{{url}}{{items.image}}" alt="" /> -->
+        <img loading="lazy" src="assets/sample1.png" alt="" />
       </div>
+      <h3>P {{ items.price }}</h3>
+      <p>{{ items.name }}</p>
+      <button (click)="addcart(items, i)">
+        <i class="bx bx-cart-add"></i>
+        <!-- <i class="bx bx-cart-add" *ngIf="loading == false"></i> -->
+        <!-- <i class="bx bx-check bx-tada" *ngIf="loading == true"></i> -->
+      </button>
+    </div>
+  </div>
 
-       <ng-container *ngIf="products.length == 0">
-          <div class="card__data">
-            <i class="bx bxs-pyramid bx-flashing"></i>
-            <p>No results found</p>
-          </div>
-        </ng-container>
-  </ng-container> 
- 
+  <ng-container *ngIf="products.length == 0">
+    <div class="card__data">
+      <i class="bx bxs-pyramid bx-flashing"></i>
+      <p>No results found</p>
+    </div>
+  </ng-container>
+</ng-container>
 
-
-   <ng-container *ngIf="isloading == true">
-         <div class="loadingcontain">
-            <mat-spinner></mat-spinner>
-            <p>Loading data please wait...</p>
-         </div>
-    </ng-container>
-
-   
+<ng-container *ngIf="isloading == true">
+  <div class="loadingcontain">
+    <mat-spinner></mat-spinner>
+    <p>Loading data please wait...</p>
+  </div>
+</ng-container>

@@ -46,7 +46,7 @@ export class CardlistComponent implements OnInit {
   category: any = [];
   products: any = [];
   favoriteitem: any = [];
-  url : string = 'http://localhost:5000/v1/images/';
+  url: string = 'http://localhost:5000/v1/images/';
   search: string = '';
   toggleheart: boolean = false;
   isloading: boolean = false;
@@ -58,36 +58,35 @@ export class CardlistComponent implements OnInit {
     Breakpoints.XSmall
   );
 
-  constructor(public _data: DataService,
+  constructor(
+    public _data: DataService,
     public _user: UserService,
     private breakpointObserver: BreakpointObserver,
     public dialog: MatDialog,
-    private _snackBar: MatSnackBar) {}
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.inititaldata();
   }
 
-
   inititaldata() {
     this.isloading = true;
-    setTimeout(()=>{
-        this._data.getdata('getproduct', 0).subscribe((data=>{
-            this.products = data.payload;
-        }))
+    setTimeout(() => {
+      this._data.getdata('getproduct', 0).subscribe((data) => {
+        this.products = data.payload;
+      });
 
-        this._data.getdata('favorites', 0).subscribe((data=>{
-            this.favoriteitem = data.payload;
-        }))
+      this._data.getdata('getfavorites', 0).subscribe((data) => {
+        this.favoriteitem = data.payload;
+      });
 
-        this._data.getdata('getcategory', 0).subscribe((data=>{
-            this.category = data.payload;
-        }))
-        this.isloading = false;
-    }, 1000)
+      this._data.getdata('getcategory', 0).subscribe((data) => {
+        this.category = data.payload;
+      });
+      this.isloading = false;
+    }, 1000);
   }
-
-
 
   addcart(items: any, id: number) {
     const dialogRef = this.dialog.open(ViewcartComponent, {
@@ -118,7 +117,6 @@ export class CardlistComponent implements OnInit {
     //   this.loading = false;
     // }, 1000);
   }
-
 
   favorite(data: any, id: number) {
     this.toggleheart = !this.toggleheart;
